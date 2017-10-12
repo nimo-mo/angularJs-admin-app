@@ -1,0 +1,33 @@
+$white:														#ffffff;
+$black:														#000000;
+$c3:															#333333;
+$c6:															#666666;
+$c9:															#999999;
+$cc:															#cccccc;
+$cd:															#dddddd;
+$ce:															#eeeeee;
+$red:															#a10000;
+
+$bg-default: #f7f7f9;
+$frame-padding-top: 66px;
+$aside-panel-width: 200px;
+
+// Start with assigning color names to specific hex values.
+$white:  #fff !default;
+$black:  #000 !default;
+$red:    #d9534f !default;
+$orange: #f0ad4e !default;
+$yellow: #ffd500 !default;
+$green:  #5cb85c !default;
+$blue:   #0275d8 !default;
+$teal:   #5bc0de !default;
+$pink:   #ff5b77 !default;
+$purple: #613d7c !default;
+
+// Create grayscale
+$gray-dark:                 #292b2c !default;
+$gray:                      #464a4c !default;
+$gray-light:                #636c72 !default;
+$gray-lighter:              #eceeef !default;
+$gray-lightest:             #f7f7f9 !default;
+$red-light:                 #ff0700 !default;

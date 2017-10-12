@@ -1,0 +1,33 @@
+.btn-switch{
+  width: 40px;
+  height: 14px;
+  border: none;
+  position: relative;
+  border-radius: 30px;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  background-color: rgb(189, 189, 189);
+  &::after{
+    top: -3px;
+    left: -2px;
+    width: 20px;
+    height: 20px;
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgb(245, 245, 245);
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  }
+  &:focus{
+    outline: none;
+  }
+  &.active{
+    background-color: rgba(0, 188, 212, 0.498039);
+    &::after{
+      left: auto;
+      right: -2px;
+      background-color: rgb(0, 188, 212);
+    }
+  }
+}

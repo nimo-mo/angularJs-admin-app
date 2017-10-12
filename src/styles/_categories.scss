@@ -1,0 +1,50 @@
+.categories {
+  white-space: nowrap;
+  padding: 15px 0; 
+  ul {
+    padding: 0;
+    list-style: none;
+    > li {
+      > a {
+        position: relative;
+        padding: 0.6em 1em;
+        display: block;
+        color: rgba(0,0,0,0.85);
+        text-decoration: none;
+        > .angle {
+          position: absolute;
+          top:50%;
+          right: 15px;
+          margin-top: -7px;
+          font-weight: bold;
+          &.rotate-90 {
+            @include rotate(90deg);
+            @extend .transition-all;
+          } 
+        }
+        &:hover {
+          background: rgba(0,0,0,0.05)
+        }
+      }
+      > a:hover {
+        
+      }
+      > ul > li > a {
+        display: block;
+        padding-left: 2em;
+      }
+      
+    }
+    > li.active {
+      > a {
+        color: $inverse-active-color;
+        background-color: $inverse-active-bg-color;
+      }
+      > ul > li.active > a {
+        color: $inverse-active-color;
+        background-color: $inverse-active-bg-color;
+      }
+      
+    }
+  }
+}

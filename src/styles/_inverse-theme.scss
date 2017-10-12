@@ -1,0 +1,46 @@
+$inverse-color: #efefef;
+$inverse-active-color: #fff;
+$inverse-bg-color: #0275d8!important;
+$inverse-active-bg-color: #006ac5!important;
+.navbar-inverse {
+  border-color: $inverse-bg-color;
+  background-color: $inverse-bg-color;
+}
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+  color: $inverse-color;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: $inverse-active-color;
+  background-color: $inverse-active-bg-color;
+}
+.btn-primary {
+  color: $inverse-active-color;
+  border-color: $inverse-active-bg-color;
+  background-color: $inverse-bg-color;
+  &:hover,
+  &.active {
+    border-color: $inverse-active-bg-color;
+    background-color: $inverse-active-bg-color;
+  }
+}
+.pagination > .active {
+  > a,
+  > a:hover,
+  > a:focus,
+  > span,
+  > span:hover,
+  > span:focus {
+    background-color: $inverse-bg-color;
+    border-color: $inverse-bg-color;
+  }
+}
+.bg-primary { background-color: $blue}
+.badge-default {}
+.badge-primary { background-color: $blue}
+.badge-success { background-color: $green }
+.badge-info { background-color: $teal }
+.badge-warning { background-color: $orange }
+.badge-danger { background-color: $red-light }
