@@ -1,5 +1,7 @@
 import './styles/index.scss';
-console.log(angular)
+import angular from 'angular';
+console.log(angular,jQuery)
+
 const appModule = angular.module('app', [
   'ui.router',
 ]);

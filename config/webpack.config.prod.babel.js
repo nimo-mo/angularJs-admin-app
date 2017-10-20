@@ -6,12 +6,16 @@ import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import vendors from './vendors.config';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 
 // your project root path
 const appPath = path.resolve(__dirname, '..')
 
 // your project src path
 const srcPath = path.resolve(__dirname, '..', 'src')
+
+const distPath = path.resolve(__dirname, '..', 'dist')
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -23,14 +27,18 @@ export default {
     extensions: ['*', '.js', '.json']
   },
   devtool: 'source-map', // more info:https://webpack.js.org/guides/production/#source-mapping and https://webpack.js.org/configuration/devtool/
-  entry: path.resolve(srcPath, 'index.js'),
+  entry: {
+    vendors: vendors,
+    app: path.resolve(srcPath, 'index.js')
+  },
   target: 'web',
   output: {
-    path: path.resolve(appPath, 'dist'),
+    path: distPath,
     publicPath: '/',
     filename: '[name].[chunkhash].js'
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'],{root:appPath}),
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 
@@ -39,6 +47,12 @@ export default {
 
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
+
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      window.jQuery: 'jquery',
+    }),
 
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
@@ -52,7 +66,7 @@ export default {
         removeEmptyAttributes: true,
         removeStyleLinkTypeAttributes: true,
         keepClosingSlash: true,
-        minifyJS: true,
+        minifyJS: false,
         minifyCSS: true,
         minifyURLs: true
       },
@@ -62,8 +76,15 @@ export default {
       trackJSToken: ''
     }),
 
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      minChunks: Infinity,
+    }),
+
     // Minify JS
-    new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true
+    }),
 
     new webpack.LoaderOptionsPlugin({
       minimize: true,

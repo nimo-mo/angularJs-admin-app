@@ -2,6 +2,8 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
+import vendors from './vendors.config';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 // your project root path
 const appPath = path.resolve(__dirname, '..')
@@ -16,35 +18,16 @@ export default {
   },
   devtool: 'eval-source-map', // more info:https://webpack.js.org/guides/development/#using-source-maps and https://webpack.js.org/configuration/devtool/
   devServer: {
-    contentBase: 'dist',
+    contentBase: './dist',
     host: '0.0.0.0',
     port: 9000,
     hot: true,
-    open: true
+    open: false
   },
   entry: {
-    app: path.resolve(srcPath, 'index.js'),
-    vendors: [
-      'babel-polyfill',
-      'moment',
-      'jquery',
-      'angular',
-      'angular-timer',
-      'angular-animate',
-      'angular-sanitize',
-      'angular-bootstrap',
-      'angular-bootstrap-confirm',
-      'angular-ui-router',
-      'angularjs-toaster',
-      'humanize-duration',
-      'ng-file-upload'
-    ]
+    vendors: vendors,
+    app: path.resolve(srcPath, 'index.js')
   },
-  // entry: [
-  //   // must be first entry to properly set public path
-  //   // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true',
-  //   path.resolve(srcPath, 'index.js') // Defining path seems necessary for this to work consistently on Windows machines.
-  // ],
   target: 'web',
   output: {
     path: path.resolve(appPath, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
@@ -55,6 +38,11 @@ export default {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
       __DEV__: true
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -77,7 +65,12 @@ export default {
         context: '/',
         // postcss: () => [autoprefixer],
       }
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      minChunks: Infinity,
+    }),
+    new BundleAnalyzerPlugin({openAnalyzer: false}),
   ],
   module: {
     rules: [
