@@ -18,11 +18,16 @@ export default {
   },
   devtool: 'eval-source-map', // more info:https://webpack.js.org/guides/development/#using-source-maps and https://webpack.js.org/configuration/devtool/
   devServer: {
-    contentBase: './dist',
+    historyApiFallback: true,
+    contentBase: './src',
     host: '0.0.0.0',
     port: 9000,
     hot: true,
-    open: false
+    open: false,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   },
   entry: {
     vendors: vendors,
@@ -47,7 +52,7 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
-      template: path.resolve(srcPath, 'index.html'),
+      template: path.resolve(srcPath, 'index.ejs'),
       minify: {
         removeComments: true,
         collapseWhitespace: true
@@ -75,6 +80,7 @@ export default {
   module: {
     rules: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.html$/, use: [ 'html-loader' ]},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
       {test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream'},

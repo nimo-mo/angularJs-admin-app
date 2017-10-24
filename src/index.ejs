@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="zh">
+<html lang="zh">
 <head>
   <% if (htmlWebpackPlugin.options.trackJSToken) { %>
   <!-- put some templates -->
@@ -8,10 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
   <title>admin app</title>
+  <base href="/">
 </head>
-<body ng-cloak>
-<div id="app">
-  <div class="test"></div>
-</div>
+<body ng-app="app" ng-strict-di>
+  <div ui-view></div>
 </body>
 </html>
