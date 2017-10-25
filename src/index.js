@@ -18,7 +18,7 @@ angular.module('app', [
 
 angular.module('app')
   // configs
-  .config(['$stateProvider', '$locationProvider', '$urlRouterProvider',appRouterConfig])
+  .config(appRouterConfig)
   // .config([
   //   '$uiRouterProvider',
   //   '$stateRegistryProvider',

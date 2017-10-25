@@ -11,7 +11,6 @@ const appPath = path.resolve(__dirname, '..')
 // your project src path
 const srcPath = path.resolve(__dirname, '..', 'src')
 
-
 export default {
   resolve: {
     extensions: ['*', '.js', '.json']
@@ -79,7 +78,7 @@ export default {
   ],
   module: {
     rules: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.js$/, exclude: /node_modules/, loaders: ['ng-annotate-loader','babel-loader']},
       {test: /\.html$/, use: [ 'html-loader' ]},
       {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff'},
