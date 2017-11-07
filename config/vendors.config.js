@@ -1,8 +1,8 @@
 const vendors =  [
   // 'babel-polyfill',
   'angular',
-  'angular-ui-router',
   'oclazyload',
+  '@uirouter/angularjs',
   // '@uirouter/core',
   // '@uirouter/angularjs',
   // '@uirouter/visualizer',

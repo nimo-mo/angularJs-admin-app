@@ -1,8 +1,6 @@
 
-export default  {
-  bindings: {
-    
-  },
+export default {
+  bindings: {},
   templateUrl: 'pages/index/index.component.html',
   controllerAs: 'vm',
   controller: class IndexController {

@@ -1,26 +1,20 @@
-export default appRouterConfig
 
-/* @ngInject */
-function appRouterConfig($stateProvider, $locationProvider, $urlRouterProvider) {
+const lazyLoadIndex = $ocLazyLoad => System.import('../pages/index/index.module').then(mod => $ocLazyLoad.load(mod.indexModule))
+
+
+export default function ($stateProvider, $locationProvider, $urlRouterProvider) {
+  'ngInject'
   $stateProvider
     .state('app',{
       url: '/app',
       title: 'app',
       component: 'app',
-      // onEnter: routerAccessProvider.access,
     })
     .state('app.index',{
       url: '/index',
       title: 'index',
       component: 'index',
-      resolve: {
-        lazyLoad: $ocLazyLoad => System.import('../pages/index/index.module').then(mod => $ocLazyLoad.load(mod.indexModule))
-        // lazyLoad: $ocLazyLoad => {
-        //   console.log($ocLazyLoad.load('../pages/index/index.component.js'))
-        // }
-      }
-      // templateUrl: '../pages/index/index.component.html',
-      // onEnter: routerAccessProvider.access,
+      resolve: { lazyLoadIndex }
     })
     .state('app.not-found',{
       url: '/not-found',
